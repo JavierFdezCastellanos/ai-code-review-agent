@@ -1,0 +1,31 @@
+name: AI Code Review Agent
+
+on:
+  push:
+    branches:
+      - "feature/*"  # Se ejecutará solo en ramas que comiencen con 'feature/'
+  workflow_dispatch:
+
+jobs:
+  generate-and-commit-reviews:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
+
+      - name: Run AI Code Review Agent
+        env:
+          REPO_URL: ${{ secrets.REPO_URL }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+        run: python agent/main.py
+
