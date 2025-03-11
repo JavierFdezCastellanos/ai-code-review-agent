@@ -2,8 +2,9 @@ import os
 import sys
 import logging
 import subprocess
-from github_client import GitHubClient
-from code_reviewer import CodeReviewer
+import secret
+from agent.github_client import GitHubClient
+from agent.code_reviewer import CodeReviewer
 
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
@@ -22,7 +23,7 @@ class AICodeReviewAgent:
             self.github_client.clone_repo(self.branch)
             
             logging.info("Generando recomendaciones de revisión de código")
-            self.code_reviewer.generate_reviews()
+            self.code_reviewer.run()
             
             logging.info("Realizando push de las recomendaciones generadas")
             self.github_client.push_reviews(self.branch)
