@@ -1,4 +1,3 @@
-import os
 import openai
 import logging
 from utils.utils import clean_generated_code, read_source_code
