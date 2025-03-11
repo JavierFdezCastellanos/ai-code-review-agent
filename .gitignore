@@ -5,5 +5,5 @@ __pycache__/
 venv/
 .idea/
 .DS_Store
-ai-test-env/
+ai-code-review-env/
 
