@@ -1,10 +1,10 @@
 import os
 import sys
 import logging
-import subprocess
 import secret
 from agent.github_client import GitHubClient
 from agent.code_reviewer import CodeReviewer
+from utils.utils import cleanup_repo
 
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
@@ -15,6 +15,7 @@ class AICodeReviewAgent:
         self.openai_api_key = openai_api_key
         self.branch = branch
         self.github_client = GitHubClient(repo_url, github_token)
+        self.repo_name = self.github_client._parse_repo_url(repo_url)[1]
         self.code_reviewer = CodeReviewer(openai_api_key)
 
     def run(self):
@@ -30,6 +31,9 @@ class AICodeReviewAgent:
             
             logging.info("Creando Pull Request")
             self.github_client.create_pull_request(self.branch)
+            
+            logging.info(f"Eliminando el repositorio: {self.repo_name}")
+            cleanup_repo(self.repo_name)
             
             logging.info("Proceso completado exitosamente.")
         except Exception as e:
