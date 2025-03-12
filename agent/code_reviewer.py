@@ -45,7 +45,7 @@ class CodeReviewer:
             response = openai.ChatCompletion.create(
                 model="gpt-3.5-turbo",
                 messages=[
-                    {"role": "system", "content": "Eres un experto Senior Data Engineer."},
+                    {"role": "system", "content": "Eres un Senior Data Engineer experto en revisión de código."},
                     {"role": "user", "content": prompt}
                 ],
                 api_key=self.api_key
