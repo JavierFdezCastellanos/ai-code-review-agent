@@ -46,8 +46,9 @@ def main():
     openai_api_key = os.getenv("OPENAI_API_KEY")
     branch_name = "ai-code-review"
     
-    if len(sys.argv) == 2:
+    if len(sys.argv) > 2:
         branch_name = sys.argv[1]
+        print(branch_name)
 
 
     agent = AICodeReviewAgent(repo_url, github_token, openai_api_key, branch_name)
