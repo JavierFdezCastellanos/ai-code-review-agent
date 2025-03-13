@@ -47,7 +47,7 @@ def main():
     branch_name = "ai-code-review"
     logging.info(sys.argv)
     logging.info(len(sys.argv))
-    if len(sys.argv) > 2:
+    if len(sys.argv) > 1:
         branch_name = sys.argv[1]
         print(branch_name)
 
