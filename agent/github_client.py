@@ -7,7 +7,8 @@ logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(
 
 class GitHubClient:
     def __init__(self, repo_url: str, token: str):
-        self.repo_url = repo_url
+        #self.repo_url = repo_url
+        self.repo_url = repo_url.replace("https://", f"https://{token}@")
         self.token = token
         self.user, self.repo_name = self._parse_repo_url(repo_url)
 
