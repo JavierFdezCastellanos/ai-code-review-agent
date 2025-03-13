@@ -45,8 +45,8 @@ def main():
     github_token = os.getenv("GITHUB_TOKEN")
     openai_api_key = os.getenv("OPENAI_API_KEY")
     branch_name = "ai-code-review"
-    print(sys.argv)
-    print(len(sys.argv))
+    logging.info(sys.argv)
+    logging.info(len(sys.argv))
     if len(sys.argv) > 2:
         branch_name = sys.argv[1]
         print(branch_name)
