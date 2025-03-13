@@ -25,7 +25,11 @@ class GitHubClient:
         try:
             subprocess.run(["git", "clone", self.repo_url], check=True)
             os.chdir(self.repo_name)
-            subprocess.run(["git", "checkout", "-b", branch], check=True)
+            if branch=="ai-code-review":
+                subprocess.run(["git", "checkout", "-b", branch], check=True)
+            else:
+                subprocess.run(["git", "checkout", branch], check=True)
+                subprocess.run(["git", "pull", "origin", branch], check=True)
         except subprocess.CalledProcessError as e:
             logging.error("Error al clonar o crear la rama: %s", e)
             raise
