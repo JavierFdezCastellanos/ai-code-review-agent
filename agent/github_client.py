@@ -26,6 +26,7 @@ class GitHubClient:
         try:
             subprocess.run(["git", "clone", self.repo_url], check=True)
             os.chdir(self.repo_name)
+            logging.info(f"esta es la rama qeu esta ejecutando {branch}")
             subprocess.run(["git", "checkout", "-b", branch], check=True)
             if (branch!="ai-code-review"):
                 subprocess.run(["git", "pull", "origin", branch], check=True)
