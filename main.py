@@ -9,7 +9,7 @@ from utils.utils import cleanup_repo
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
 class AICodeReviewAgent:
-    def __init__(self, repo_url: str, github_token: str, openai_api_key: str, branch: str = "ai-code-review"):
+    def __init__(self, repo_url: str, github_token: str, openai_api_key: str, branch: str):
         self.repo_url = repo_url
         self.github_token = github_token
         self.openai_api_key = openai_api_key
@@ -44,12 +44,13 @@ def main():
     repo_url = os.getenv("REPO_URL")
     github_token = os.getenv("GITHUB_TOKEN")
     openai_api_key = os.getenv("OPENAI_API_KEY")
+    branch_name = "ai-code-review"
+    
+    if len(sys.argv) == 2:
+        branch_name = sys.argv[1]
 
-    if not repo_url or not github_token or not openai_api_key:
-        logging.error("Faltan variables de entorno necesarias: REPO_URL, GITHUB_TOKEN, OPENAI_API_KEY")
-        sys.exit(1)
 
-    agent = AICodeReviewAgent(repo_url, github_token, openai_api_key)
+    agent = AICodeReviewAgent(repo_url, github_token, openai_api_key, branch_name)
     agent.run()
 
 if __name__ == "__main__":
