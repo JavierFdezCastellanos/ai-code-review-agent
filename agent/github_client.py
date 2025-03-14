@@ -40,7 +40,7 @@ class GitHubClient:
         logging.info("Haciendo push de las recomendaciones en la rama %s...", branch)
         try:
             subprocess.run(["git", "add", "."], check=True)
-            subprocess.run(["git", "commit", "-m", "AI-generated code review recommendations"], check=True)
+            subprocess.run(["git", "commit", "-m", "AI-generated code review recommendations [skip ci]"], check=True)
             subprocess.run(["git", "push", "origin", branch], check=True)
         except subprocess.CalledProcessError as e:
             logging.error("Error al hacer push de las recomendaciones: %s", e)
