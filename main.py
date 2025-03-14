@@ -29,8 +29,9 @@ class AICodeReviewAgent:
             logging.info("Realizando push de las recomendaciones generadas")
             self.github_client.push_reviews(self.branch)
             
-            logging.info("Creando Pull Request")
-            self.github_client.create_pull_request(self.branch)
+            if self.branch=="ai-code-review":
+                logging.info("Creando Pull Request")
+                self.github_client.create_pull_request(self.branch)
             
             logging.info(f"Eliminando el repositorio: {self.repo_name}")
             cleanup_repo(self.repo_name)
